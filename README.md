@@ -337,3 +337,165 @@ Our instance is in the eu-west-3c availability zone. We can create the volume in
 
    ![Attach Volume](img/AttachVolume.png)
    ![Volume Attached](img/VolumeAttached.png)
+
+### Login as '**root**'
+
+1. Create File System on the new EBS volume attached in the previous step
+
+   With the command ``lsblk`` we can see available volumes. We can see the new volume is /dev/xvdf.
+
+   `mkfs -t ext4 /dev/xvdf`
+
+   ![Create File System](img/CreateFileSystem.png)
+2. Mount the File System on /data directory
+   
+   First we need to create the directory /data.
+
+   `mkdir /data`
+   
+   Now we can mount the file system.
+
+   `mount /dev/xvdf /data`
+
+3. Verify File System utilization using ‘df -h’ command – This command must show /data file system
+
+   `df -h`
+
+   ![Mount File System](img/MountFileSystem.png)
+4. Create file ‘f1’ in the /data file system.
+
+   `touch /data/f1`
+
+   ![Check File System](img/CheckFileSystem2.png)
+
+### Login as '**user5**'
+
+1. Delete /dir1
+
+   `rm -R /dir1`
+2. Delete /dir2
+
+   We need to grant permissions to delete the directory. We can use the following command in super user account:
+
+   `chmod -R o+w /dir2`
+
+   Now we can delete the directory with user5.
+
+   `rm -R /dir2`
+3. Delete /dir3
+
+   We need to grant permissions to delete the directory. We can use the following command in super user account:
+
+   `chmod -R o+w /dir3`
+
+   Now we can delete the directory with user5.
+
+   `rm -R /dir3`
+4. Delete /dir5
+
+   We need to grant permissions to delete the directory. We can use the following command in super user account:
+
+   `chmod -R o+w /dir5`
+
+   Now we can delete the directory with user5.
+
+   `rm -R /dir5`
+5. Delete /dir7
+
+   We need to grant permissions to delete the directory. We can use the following command in super user account:
+
+   `chmod -R o+w /dir7`
+
+   Now we can delete the directory with user5.
+
+   `rm -R /dir7`
+6. Delete /f1 & /f4
+
+   We need to grant permissions to delete the files. We can use the following command in super user account:
+
+   `chmod -R o+w /f1`
+
+   `chmod -R o+w /f4`
+
+   Now we can delete the files with user5.
+
+   `rm /f1`
+
+   `rm /f4`
+7. Delete /opt/dir14
+
+   We need to grant permissions to delete the directory. We can use the following command in super user account:
+
+   `chmod -R o+w /opt`
+
+   `chmod -R o+w /opt/dir14`
+
+   Now we can delete the directory with user5.
+
+   `rm -R /opt/dir14`
+
+### Login as '**root**'
+
+1. Delete users – ‘user1, user2, user3, user4, user5’
+
+   `userdel -r jcb`
+
+   `userdel -r jcb2`
+
+   `userdel -r jcb3`
+
+   `userdel -r jcb4`
+
+   `userdel -r jcb5`
+
+   ![Delete users](img/DeleteUsers.png)
+2. Delete groups – app, aws, database, devops
+
+   `groupdel app`
+
+   `groupdel aws`
+
+   `groupdel database`
+
+   `groupdel devops`
+3. Delete home directories  of all users ‘user1, user2, user3, user4, user5’ if any exists still.
+
+   `rm -R /home/jcb`
+
+   `rm -R /home/jcb2`
+
+   `rm -R /home/jcb3`
+
+   `rm -R /home/jcb4`
+
+   `rm -R /home/jcb5`
+4. Unmount /data file system
+
+   `umount /data`
+
+   ![Unmount File System](img/UnmountFileSystem.png)
+5. Delete /data directory
+
+   `rm -R /data`
+
+### Login to AWS and detach EBS volume to the EC2 Instance and delete the volume and then terminate EC2 instance.
+
+1. Go to AWS Management Console and click on EC2.
+2. Go to Volumes and select the volume.
+3. Click on Actions -> Detach Volume.
+4. Click on Detach.
+
+   ![Detach Volume](img/DetachVolume.png)
+
+5. Go to Volumes and select the volume.
+6. Click on Actions -> Delete Volume.
+7. Click on Delete.
+
+   ![Delete Volume](img/DeleteVolume.png)
+
+8. Go to Instances and right click on the instance.
+9. Click on Terminate instance.
+
+    ![Terminate Instance](img/TerminateInstance.png)
+
+## Exercises completed successfully.
