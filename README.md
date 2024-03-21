@@ -18,7 +18,7 @@ Following the instructions of the exersice at: [devopsrealtime.com](https://devo
 
 ## Linux Commands
 
-### Create users and groups as '__super user__'
+### Create users and groups as '**super user**'
 
 1. Create users and set passwords
 
@@ -109,7 +109,7 @@ Following the instructions of the exersice at: [devopsrealtime.com](https://devo
 
    ![Change ownership](img/change_ownership.png)
 
-### Create users as '__user1__'
+### Create users as '**user1**'
 
 We need to change sshd_config file to allow that user to login. Edit /etc/ssh/sshd_config file and change `PasswordAuthentication no` to `PasswordAuthentication yes`.
 Restart the sshd service with the following command: `sudo service sshd restart`
@@ -119,7 +119,7 @@ We also need to add the user to the sudoers file and add permissions. Edit the f
 
 Now we can login as user1 and create the users, groups, change groups, create and remove directories and files, etc. You can adapt the necessary commands to the user1 permissions.
 
-### Login as '__user1__'
+### Login as '**user1**'
 
 ![Login as user1](img/jcb_putty_login.png)
 
@@ -139,7 +139,7 @@ Now we can login as user1 and create the users, groups, change groups, create an
 
    `sudo groupadd database`
 
-### Login as '__user4__'
+### Login as '**user4**'
 
 Before user4 login we need to add permissions to the user to execute commands in some directories.
 
@@ -178,46 +178,68 @@ Login as user4 with putty.
 
    `mv /f2 /f4`
 
-    ![Check directories](img/check_directories_jcb4_1.png)
+   ![Check directories](img/check_directories_jcb4_1.png)
 
-    ![Check directories](img/check_directories_jcb4_2.png)
+   ![Check directories](img/check_directories_jcb4_2.png)
 
-### Login as '__user1__'
+### Login as '**user1**'
+
+In this section we need to create a directory in user2 home directory. We need to change the permissions of the directory to allow user1 to write in it.
+
+Login as user2 with putty and grant write permissions to the directory. We are in the home directory of user2.
+
+`chmod o+rwx .`
+
+We can use the following command: `chmod o+w /home/jcb2/dir1`
+
+Also grant permissions to create files in the directory of the second exercise.
+
+`chmod o+w /opt/dir14/dir10`
+
+To delete the directory recursively we need to grant permissions to the directory.
+
+We can do it recursively with the following command:
+
+`chmod -R o+w /dir4`
+
+For exercise 5 we need to grant permissions to the directory.
+
+`chmod -R o+w /opt/dir14`
+
+For exercise 6 we need to grant permissions with user4 to write in the file f3.
+
+`chmod o+w /f3`
 
 1. Create directory – “/home/user2/dir1”
 
-    `mkdir -p /home/jcb2/dir1`
+   `mkdir -p /home/jcb2/dir1`
+
+   ![Check directories](img/check_directories_jcb_1.png)
 
 2. Change to “/dir2/dir1/dir2/dir10” directory and create file “/opt/dir14/dir10/f1” using relative path method.
 
-    `cd /dir2/dir1/dir2/dir10`
+   `cd dir2/dir1/dir2/dir10`
 
-    `touch ../../../../opt/dir14/dir10/f1`
+   Remember, we need to go back 4 levels to create the file in the correct directory.
 
-    ![Check directories](img/check_directories_jcb1_1.png)
+   `touch ../../../../opt/dir14/dir10/f1`
 
-    ![Check directories](img/check_directories_jcb1_2.png)
+   ![Check directories](img/check_directories_jcb1_2.png)
 
-3. Move the file from “/opt/dir14/dir10/f1” to  user1 home directory
+3. Move the file from “/opt/dir14/dir10/f1” to user1 home directory
 
-    `mv /opt/dir14/dir10/f1 /home/jcb`
-
-    ![Check directories](img/check_directories_jcb1_3.png)
+   `mv /opt/dir14/dir10/f1 /home/jcb`
 
 4. Delete the directory recursively “/dir4”
 
-    `rm -rf /dir4`
-
-    ![Check directories](img/check_directories_jcb1_4.png)
+   `rm -R /dir4`
 
 5. Delete all child files and directories under “/opt/dir14” using single command.
 
-    `rm -rf /opt/dir14/*`
+   `rm -R /opt/dir14/*`
 
-    ![Check directories](img/check_directories_jcb1_5.png)
-    
 6. Write this text “Linux assessment for an DevOps Engineer!! Learn with Fun!!” to the /f3 file and save it.
 
-    `echo "Linux assessment for an DevOps Engineer!! Learn with Fun!!" > /f3`
+   `echo "Linux assessment for an DevOps Engineer!! Learn with Fun!!" > /f3`
 
-    ![Check directories](img/check_directories_jcb1_6.png)
+   ![Check directories](img/check_file_jcb1_6.png)
